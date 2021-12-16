@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Signin from './src/pages/Signin';
-import AppLoading from 'expo-app-loading';
+import { createStackNavigator } from '@react-navigation/stack';
 import 'reflect-metadata';
+import { NavigationContainer } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading'
+
 
 import {
   useFonts,
@@ -14,23 +15,55 @@ import {
 } from '@expo-google-fonts/ubuntu';
 
 
+import { RootSiblingParent } from 'react-native-root-siblings';
+import Routes from './src/Rotas';
+
+
 
 
 export default function App() {
+
   const [fontsLoaded] = useFonts({
     Ubuntu_300Light,
     Ubuntu_300Light_Italic,
     Ubuntu_500Medium,
     Ubuntu_700Bold,
+ 
   });
+ 
+  if (!fontsLoaded) 
+  return(<AppLoading/>)  
 
-  if (!fontsLoaded) return <AppLoading />;
+
+  
+  return (
+    <NavigationContainer>
+        <RootSiblingParent>
+            <Routes />
+        </RootSiblingParent>
+    </NavigationContainer>
+        );
+
+
+}
+
+
+
 
   
 
-  return (
-     <Signin />
-  );
-}
+
+  //if (!fontsLoaded) return <AppLoading />;
+
+ // return (
+  //  <NavigationContainer>
+ //       <MyStack />
+////    </NavigationContainer>
+//  );
+
+ // return (
+    //  <Login />
+//  );
+//}
 
 

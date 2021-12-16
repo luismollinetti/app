@@ -1,10 +1,8 @@
-
-
 import { StatusBar } from 'expo-status-bar';
 import { Form } from '@unform/mobile';
 import React, { ReactElement, useCallback, useRef, useState } from 'react';
 import { User, Key, Company as CompanyIcon, Email } from '../../assets/icons';
-
+import Button from '../../components/Button';
 import {
   Alert,
   Keyboard,
@@ -17,61 +15,79 @@ import {
 } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';   
 import styles from './styles';
-import { Button } from 'react-native-elements';  
 import Icon from 'react-native-vector-icons/FontAwesome';   
-import Input from '../../../components/form/Input'
+import Input from '../../components/form/Input'
 import global from '../../../styles/global'; 
 import { FormHandles,SubmitHandler } from '@unform/core';
 import img from '../../assets/logo/money.png'
 import { Feather } from '@expo/vector-icons';
 import * as yup from 'yup';
-import Loading from '../../../components/Loading';
+
+import Principal from '../Principal';
+import Produtos from '../Produtos';
+import Loading from '../../components/Loading';
 
 
 
 
-export default function Signin() {
 
-  const [email,setEmail] = useState(null)
-  const [password,setPassword] = useState(null)
-  const [isLoading, setIsLoading] = useState(false);
+export default function Login({navigation}) {
+
+ // const [email,setEmail] = useState(null)
+//  const [password,setPassword] = useState(null)
+//  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
 
 
 
-  const handleSubmit: SubmitHandler<FormData> = useCallback(
-    async (data: any) => {
-      try {
-        const FormSchema = yup.object().shape({
+  const handleSubmit: SubmitHandler<FormData> = () => {
+
+      navigation.reset({
+        index:0,
+        routes: [{name:"Principal"}]
+       })
+         
+  }
+  //useCallback() => {
+      ///try {
+
+    //    <Produtos/>
+    //    const FormSchema = yup.object().shape({
        
-          user: yup.string().required('Selecione o seu usuário.'),
-          password: yup.string().required('Campo obrigatório!'),
-        });
-        await FormSchema.validate(data, {
-          abortEarly: false,
-        });
-        console.log('dfsf')
-        setIsLoading(true);
+    ///      user: yup.string().required('Selecione o seu usuário.'),
+    ///      password: yup.string().required('Campo obrigatório!'),
+    ///    });
+    ///    await FormSchema.validate(data, {
+    ///      abortEarly: false,
+    //    });
+    
+      
+    //  navigation.reset({
+     //   index:0,
+     //  routes: [{name:"Principal"}]
+     //  })
+         
+    //    setIsLoading(true);
         // reset();
-      } catch (err) {
-        const errorMessages: Record<string, any> = {};
-        if (err instanceof yup.ValidationError) {
-          err.inner.forEach((error) => {
-            const errorPath = error.path ? error.path : '';
-            errorMessages[errorPath] = error.message;
-          });
-          formRef.current?.setErrors(errorMessages);
-        } else {
-          Alert.alert(
-            'Ocorreu um erro inesperado. 😥 \n Tente novamente mais tarde.'
-          );
-        }  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(true);
-       setIsLoading(false)
-      }
-    },
-    [],
-  );
+     // } catch (err) {
+     //   const errorMessages: Record<string, any> = {};
+      //  if (err instanceof yup.ValidationError) {
+      //    err.inner.forEach((error) => {
+       //     const errorPath = error.path ? error.path : '';
+       //     errorMessages[errorPath] = error.message;
+       //   });
+       //   formRef.current?.setErrors(errorMessages);
+      //  } else {
+      //    Alert.alert(
+      //      'Ocorreu um erro inesperado. 😥 \n Tente novamente mais tarde.'
+     //     );
+     //   }  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(true);
+     // setIsLoading(false)
+    //  }
+ //   },
+  //  [],
+  //);
 
 
   
@@ -84,8 +100,8 @@ export default function Signin() {
         <Feather {...props} name={!passwordVisible ? 'eye-off' : 'eye'} />
       </TouchableWithoutFeedback>
   );  
-  console.log('before')
-  if (isLoading) return <Loading />;
+ 
+ /// if (isLoading) return <Loading />;
   
   return (
     <KeyboardAvoidingView behavior="padding" style={global.container}>
@@ -137,9 +153,10 @@ export default function Signin() {
                     />
 
                     <Button
-                      title="ENTRAR"
-                      onPress={() => formRef.current?.submitForm()}
-                    />
+                    title="ENTRAR"
+                    onPress={() => formRef.current?.submitForm()}
+                  /> 
+                
  
 
 
