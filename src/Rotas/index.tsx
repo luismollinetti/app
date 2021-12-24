@@ -5,7 +5,7 @@ import StackRoutes from './stack.routes';
 import DrawerRoutes from './drawer.routes';
 
 const Routes = () => {
-  const signed = false
+  const signed = true
   return signed ? <DrawerRoutes /> : <StackRoutes />;
 };
 

@@ -31,7 +31,7 @@ type HomeType = {
   navigation: any;
 };
 
-const Home: React.FC<HomeType> = ({ navigation }) => {
+export default function Home ({ navigation })  {
 
   const currencyFormat = (num: number) => {
     return `R$ ${num.toFixed(2).replace('.', ',')}`;
@@ -72,11 +72,15 @@ const Home: React.FC<HomeType> = ({ navigation }) => {
   const sellsAverange = 22
 
   return (
+
+    
+
     <SafeAreaView style={[globals.scrollContainer]}>
+      
       <Toolbar
-        navigation={navigation}
-        company={"Empresa"}
-        seller={"Vendedor"}
+          navigation={navigation}
+         company={"Empresa"}
+         seller={"Vendedor"}
       />
 
       <ImageBackground source={imgBackground} style={globals.imageBackground}>
@@ -135,4 +139,4 @@ const Home: React.FC<HomeType> = ({ navigation }) => {
   );
 };
 
-export default Home;
+

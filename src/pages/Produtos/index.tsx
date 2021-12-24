@@ -6,9 +6,9 @@ export default function Produtos(){
 
     return(
       <View>  
-         <Text>PRODUTO</Text>
+         <Text>PRODUTO  asdfasdfdsf dfdfdf</Text>
       </View>
     )
-  
+    
 };
 

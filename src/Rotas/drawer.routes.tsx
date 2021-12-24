@@ -1,8 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerContentComponentProps,
+} from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
+import DrawerHeader from '../components/DrawerHeader';
 
 
 import Clientes from '../pages/Clientes';
@@ -26,45 +33,57 @@ import {
 
 const Drawer = createDrawerNavigator();
 
+
+function CustomDrawerContent(props: DrawerContentComponentProps) {
+  const { state } = props;
+  const filteredProps = {
+    ...props,
+    state: {
+      ...state,
+      routeNames: state.routeNames.filter(
+        // To hide single option
+        // (routeName) => routeName !== 'HiddenPage1',
+        // To hide multiple options you can add & condition
+        (routeName) => {
+          return routeName !== 'CustomersAdd' && routeName !== 'RequestsAdd';
+        },
+      ),
+      routes: state.routes.filter(
+        (route) =>
+          route.name !== 'CustomersAdd' && route.name !== 'RequestsAdd',
+      ),
+    },
+  };
+
+  return (
+    <DrawerContentScrollView
+      style={{ backgroundColor: 'red' }}
+      {...filteredProps}
+    >
+      <DrawerHeader />
+      <DrawerItemList {...filteredProps} />
+    </DrawerContentScrollView>
+  );
+}
+
 export default function App() {
   return (
 
-    <Drawer.Navigator
-        initialRouteName="Home"
-        options={{headerShown: false}}
-        drawerContentOptions={{
-          itemStyle: {
-            marginLeft: 0,
-            paddingLeft: 8,
-            flexDirection: 'column',
-            width: '90%',
-            borderTopStartRadius: 0,
-            borderBottomStartRadius: 0,
-            borderBottomEndRadius: 25,
-            borderTopEndRadius: 25,
-          },
-          activeTintColor: '#FFF',
-          activeBackgroundColor: '#ce0901',
-          contentContainerStyle: {
-            paddingTop: 0,
-            marginTop: 0,
-          },
-          labelStyle: {
-            fontFamily: 'Ubuntu_500Medium',
-            fontSize: (Dimensions.get('screen').height / 100) * 2.1,
-            marginLeft: -15,
-            width: '125%',
-          },
-          style: {},
-        }}
-      >
+    <Drawer.Navigator 
+      initialRouteName="Home"
+
+      drawnerStyle={{
+        backgroundColor:"#e6e6e6"
+      }}
+    
+    >
 
        <Drawer.Screen
         name="Home"
         component={Home}
         options={{
-          drawerLabel: 'Home',
-          drawerIcon: ({ color }) => <Clients style={{ color }} size={18} />,
+        gestureEnabled: true  
+         //  drawerIcon: ({ color }) => <Clients style={{ color }} size={18} />
         }}
       />
 

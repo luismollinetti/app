@@ -23,7 +23,7 @@ import img from '../../assets/logo/money.png'
 import { Feather } from '@expo/vector-icons';
 import * as yup from 'yup';
 
-import Principal from '../Principal';
+
 import Produtos from '../Produtos';
 import Loading from '../../components/Loading';
 
@@ -45,7 +45,7 @@ export default function Login({navigation}) {
 
       navigation.reset({
         index:0,
-        routes: [{name:"Principal"}]
+        routes: [{name:"Home"}]
        })
          
   }
