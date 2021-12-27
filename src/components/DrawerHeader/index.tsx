@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 
 export default function DrawerHeader () {
-  const userName = 'Rafael Scholant';
+  const userName = 'Luis';
 
   return (
     <View style={styles.container}>

@@ -45,19 +45,19 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         // (routeName) => routeName !== 'HiddenPage1',
         // To hide multiple options you can add & condition
         (routeName) => {
-          return routeName !== 'CustomersAdd' && routeName !== 'RequestsAdd';
+          return routeName !== '' && routeName !== '';
         },
       ),
       routes: state.routes.filter(
         (route) =>
-          route.name !== 'CustomersAdd' && route.name !== 'RequestsAdd',
+          route.name !== '' && route.name !== '',
       ),
     },
   };
 
   return (
     <DrawerContentScrollView
-      style={{ backgroundColor: 'red' }}
+      style={{ backgroundColor: 'silver' }}
       {...filteredProps}
     >
       <DrawerHeader />
@@ -70,12 +70,28 @@ export default function App() {
   return (
 
     <Drawer.Navigator 
+ 
       initialRouteName="Home"
-
-      drawnerStyle={{
-        backgroundColor:"#e6e6e6"
+      hideStatusBar={false}
+      screenOptions={{
+ 
+        activeTintColor: '#FFF',
+        activeBackgroundColor: '#ce0901',
+        contentContainerStyle: {
+          paddingTop: 0,
+          marginTop: 0,
+        },
+        labelStyle: {
+          fontFamily: 'Ubuntu_500Medium',
+          fontSize: (Dimensions.get('screen').height / 100) * 2.1,
+          marginLeft: -15,
+          width: '125%',
+        },
+        style: {},
       }}
-    
+
+
+      drawerContent={CustomDrawerContent} 
     >
 
        <Drawer.Screen

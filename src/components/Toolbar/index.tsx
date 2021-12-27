@@ -19,6 +19,9 @@ export default function Toolbar({ navigation, company, seller }: ToolbarProps) {
   const handlerOpenMenu = () => {
     navigation.openDrawer();
   };
+
+  const empresa = 'Empresa Teste'
+  const vendedor = 'Vendedor Teste'
   
   return (
     <LinearGradient
@@ -30,14 +33,14 @@ export default function Toolbar({ navigation, company, seller }: ToolbarProps) {
         backgroundColor="#ce0901"
         barStyle="light-content"
       />
+    
 
-      <TouchableOpacity style={styles.touchable} onPress={handlerOpenMenu}>
-        <Menu size={25} color="#FFF" />
-      </TouchableOpacity>
+
       <View style={styles.containerText}>
-        <Text style={styles.textCompany}>{company}</Text>
-        <Text style={styles.textSeller}>{seller}</Text>
+        <Text style={styles.textCompany}>{empresa}</Text>
+        <Text style={styles.textSeller}>{vendedor}</Text>
       </View>
+
       <TouchableOpacity style={styles.touchable} >
         <UserReload size={25} color="#FFF" />
       </TouchableOpacity>
