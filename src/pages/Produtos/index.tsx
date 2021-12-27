@@ -6,7 +6,7 @@ export default function Produtos(){
 
     return(
       <View>  
-         <Text>PRODUTO  asdfasdfdsf dfdfdf</Text>
+         <Text>PRODUTO DE CASA</Text>
       </View>
     )
     
