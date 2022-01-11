@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontFamily: 'Ubuntu_300Light',
-    fontSize: (dimensions.height / 100) * 1.8,
+    fontSize: (dimensions.height / 100) * 1.9,
   },
   updateTextBold: {
     fontFamily: 'Ubuntu_500Medium',
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   cardText: {
-    paddingTop: 5,
+    paddingTop: 10,
     textAlign: 'center',
     fontSize: (dimensions.height / 100) * 1.8,
   },

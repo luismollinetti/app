@@ -3,6 +3,7 @@ import { Form } from '@unform/mobile';
 import React, { ReactElement, useCallback, useRef, useState } from 'react';
 import { User, Key, Company as CompanyIcon, Email } from '../../assets/icons';
 import Button from '../../components/Button';
+
 import {
   Alert,
   Keyboard,
@@ -22,74 +23,62 @@ import { FormHandles,SubmitHandler } from '@unform/core';
 import img from '../../assets/logo/money.png'
 import { Feather } from '@expo/vector-icons';
 import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/core';
+import Toast from 'react-native-root-toast';
 
-
-import Produtos from '../Produtos';
 import Loading from '../../components/Loading';
 
 
 
 
 
-export default function Login({navigation}) {
+export default function Login() {
 
  // const [email,setEmail] = useState(null)
 //  const [password,setPassword] = useState(null)
-//  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(true);
 
+  const navigation = useNavigation();
 
+  const handleSubmit: SubmitHandler<FormData> = useCallback(
+    async (data: any) => {
+      try {
+        setIsLoading(true);
+        const FormSchema = yup.object().shape({
+          company: yup.string().required('Selecione a sua empresa.'),
+          user: yup.string().required('Selecione o seu usuário.'),
+          password: yup.string().required('Campo obrigatório!'),
+        });
+        
+        await FormSchema.validate(data, {
+          abortEarly: false,
+        });
 
-  const handleSubmit: SubmitHandler<FormData> = () => {
+ 
 
-      navigation.reset({
-        index:0,
-        routes: [{name:"Home"}]
-       })
-         
-  }
-  //useCallback() => {
-      ///try {
+        if (formRef.current) formRef.current.setErrors({});
+        
 
-    //    <Produtos/>
-    //    const FormSchema = yup.object().shape({
-       
-    ///      user: yup.string().required('Selecione o seu usuário.'),
-    ///      password: yup.string().required('Campo obrigatório!'),
-    ///    });
-    ///    await FormSchema.validate(data, {
-    ///      abortEarly: false,
-    //    });
-    
-      
-    //  navigation.reset({
-     //   index:0,
-     //  routes: [{name:"Principal"}]
-     //  })
-         
-    //    setIsLoading(true);
         // reset();
-     // } catch (err) {
-     //   const errorMessages: Record<string, any> = {};
-      //  if (err instanceof yup.ValidationError) {
-      //    err.inner.forEach((error) => {
-       //     const errorPath = error.path ? error.path : '';
-       //     errorMessages[errorPath] = error.message;
-       //   });
-       //   formRef.current?.setErrors(errorMessages);
-      //  } else {
-      //    Alert.alert(
-      //      'Ocorreu um erro inesperado. 😥 \n Tente novamente mais tarde.'
-     //     );
-     //   }  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(true);
-     // setIsLoading(false)
-    //  }
- //   },
-  //  [],
-  //);
-
-
+      } catch (err) {
+        const errorMessages: Record<string, any> = {};
+        if (err instanceof yup.ValidationError) {
+          err.inner.forEach((error) => {
+            const errorPath = error.path ? error.path : '';
+            errorMessages[errorPath] = error.message;
+          });
+          formRef.current?.setErrors(errorMessages);
+        } else {
+          Alert.alert(
+            'Ocorreu um erro inesperado. 😥 \n Tente novamente mais tarde.',
+          );
+        }
+      }
+    },
+    [],
+  );
   
   const onPasswordIconPress = (): void => {
       setPasswordVisible(!passwordVisible);
@@ -101,7 +90,9 @@ export default function Login({navigation}) {
       </TouchableWithoutFeedback>
   );  
  
- /// if (isLoading) return <Loading />;
+
+
+  if (isLoading) return <Loading />;
   
   return (
     <KeyboardAvoidingView behavior="padding" style={global.container}>

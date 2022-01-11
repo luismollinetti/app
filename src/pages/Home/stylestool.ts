@@ -3,8 +3,8 @@ import Constants from 'expo-constants';
 
 export default StyleSheet.create({
   container: {
-    height: 80 + Constants.statusBarHeight,
-    padding: 15,
+    height: 60 + Constants.statusBarHeight,
+    padding: 10,
     backgroundColor: '#ce0901',
     flexDirection: 'row',
     marginTop: -Constants.statusBarHeight,

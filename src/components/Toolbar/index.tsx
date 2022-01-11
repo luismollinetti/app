@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Menu, UserReload } from '../../assets/icons';
+import { BackHandler } from 'react-native';
 
 
 import styles from './styles';
@@ -14,6 +15,9 @@ interface ToolbarProps {
 
 export default function Toolbar({ navigation, company, seller }: ToolbarProps) {
 
+  function handleSignOut() {
+    BackHandler.exitApp();
+  }
 
 
   const handlerOpenMenu = () => {
@@ -32,18 +36,23 @@ export default function Toolbar({ navigation, company, seller }: ToolbarProps) {
         translucent
         backgroundColor="#ce0901"
         barStyle="light-content"
+        
       />
-    
 
+      <TouchableOpacity style={styles.touchable} onPress={handlerOpenMenu}>
+        <Menu size={25} color="#FFF" />
+      </TouchableOpacity>
 
       <View style={styles.containerText}>
         <Text style={styles.textCompany}>{empresa}</Text>
         <Text style={styles.textSeller}>{vendedor}</Text>
       </View>
 
-      <TouchableOpacity style={styles.touchable} >
+      <TouchableOpacity style={styles.touchable} onPress={handleSignOut}>
         <UserReload size={25} color="#FFF" />
       </TouchableOpacity>
+    
     </LinearGradient>
   );
 }
+

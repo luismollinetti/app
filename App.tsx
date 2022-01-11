@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import 'reflect-metadata';
 import { NavigationContainer } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading'

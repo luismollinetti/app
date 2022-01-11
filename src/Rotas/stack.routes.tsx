@@ -1,30 +1,26 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Home } from '../assets/icons';
+import Home  from '../pages/Home';
 import Clientes from '../pages/Clientes';
 import Produtos from '../pages/Produtos';
-
 import Login from '../pages/Login';
+import Welcome from '../pages/Welcome';
 
-const StackRoutes = createStackNavigator();
+const stackRoutes = createStackNavigator();
 
-function AppRoutes() {
+export default function AppRoutes() {
   return (
-    <StackRoutes.Navigator 
-      
-       screenOptions={{ 
-              cardStyle: { backgroundColor: 'white' } ,
-              headerShown: false    
-       }}
-       initialRouteName="Login"
-  >        
-      <StackRoutes.Screen name="Login" component={Login}  />   
-    
-      <StackRoutes.Screen name="Produtos" component={Produtos} />    
-      <StackRoutes.Screen name="Clientes" component={Clientes} />      
-      <StackRoutes.Screen name="Home" component={Home} />    
-    </StackRoutes.Navigator>
+    <stackRoutes.Navigator
+     
+    screenOptions={{ cardStyle: { backgroundColor: 'white' } }}
+    initialRouteName="Welcome">
+    <stackRoutes.Screen name="Welcome" component={Welcome} />        
+    <stackRoutes.Screen name="Login" component={Login} />
+    <stackRoutes.Screen name="Home" component={Home} />
+    <stackRoutes.Screen name="Produtos" component={Produtos} />
+    <stackRoutes.Screen name="Clientes" component={Clientes} />
+  </stackRoutes.Navigator>
   );
 }
 
-export default AppRoutes;
+

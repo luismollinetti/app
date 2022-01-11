@@ -4,7 +4,7 @@ import {
   Text,
   ScrollView,
   ImageBackground,
-  RefreshControl,
+  TouchableOpacity, StatusBar,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,13 +12,17 @@ import { FloatingAction } from 'react-native-floating-action';
 import styles from './styles';
 import SingleCard from '../../components/Cards';
 import { Request, Clients } from '../../assets/icons';
+import { Menu, UserReload } from '../../assets/icons';
 
+import { LinearGradient } from 'expo-linear-gradient';
 
+import { BackHandler } from 'react-native';
 import Toolbar from '../../components/Toolbar';
 
 import imgBackground from './../../assets/bgApp.png'
 
 import globals from '../../../styles/global';
+import stylestool from './stylestool';
 
 
 const wait = (timeout: any) => {
@@ -31,7 +35,10 @@ type HomeType = {
   navigation: any;
 };
 
-export default function Home ({ navigation })  {
+
+
+// const Home: React.FC<HomeType> = ({ navigation }) => {
+export default function Home({ navigation })  {
 
   const currencyFormat = (num: number) => {
     return `R$ ${num.toFixed(2).replace('.', ',')}`;
@@ -70,18 +77,24 @@ export default function Home ({ navigation })  {
   const requestsCount = 15
   const sellsValue = 112.50
   const sellsAverange = 22
+  const empresa = "Empresa"
+  const vendedor = "Vendedor"
+
+
 
   return (
 
     
 
-    <SafeAreaView style={[globals.scrollContainer]}>
-      
+    <SafeAreaView style={[globals.scrollContainer]} >
+
       <Toolbar
-          navigation={navigation}
-         company={"Empresa"}
-         seller={"Vendedor"}
+        navigation={navigation}
+        company={empresa}
+        seller={vendedor}
       />
+      
+     
 
       <ImageBackground source={imgBackground} style={globals.imageBackground}>
         <ScrollView
@@ -138,5 +151,6 @@ export default function Home ({ navigation })  {
     </SafeAreaView>
   );
 };
+
 
 

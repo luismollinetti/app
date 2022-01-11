@@ -73,8 +73,7 @@ export default function App() {
  
       initialRouteName="Home"
       hideStatusBar={false}
-      screenOptions={{
- 
+      screenOptions={{ 
         activeTintColor: '#FFF',
         activeBackgroundColor: '#ce0901',
         contentContainerStyle: {
@@ -90,15 +89,16 @@ export default function App() {
         style: {},
       }}
 
-
       drawerContent={CustomDrawerContent} 
     >
 
        <Drawer.Screen
         name="Home"
         component={Home}
+        
         options={{
-        gestureEnabled: true  
+          headerShown:false,
+          gestureEnabled: true  
          //  drawerIcon: ({ color }) => <Clients style={{ color }} size={18} />
         }}
       />
